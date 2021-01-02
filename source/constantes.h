@@ -1,5 +1,5 @@
 /********************* Cantos posibles ***************************/
-   
+
 const int MENU = -1;
 const int TRUCO = 0;
 const int RETRUCO = 1;

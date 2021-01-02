@@ -1,9 +1,0 @@
-
-libfreetype-6.dll
-libpng12-0.dll
-mingwm10.dll
-SDL.dll
-SDL_gfx.dll
-SDL_image.dll
-SDL_ttf.dll
-zlib1.dll
