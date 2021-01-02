@@ -31,7 +31,10 @@ pkgs.stdenv.mkDerivation {
   ];
 
   installPhase = ''
-    mkdir -p $out/bin
+    mkdir -p $out/bin/img
+    cp -r img/* $out/bin/img
+    cp -r ./*.doc $out/bin/
+    cp -r ./*.ttf $out/bin/
     cp truco-exe $out/bin/truco
   '';
 
