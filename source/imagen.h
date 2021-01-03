@@ -15,8 +15,10 @@ SDL_Surface * Imagen::cargar_img (const char * fname)
   string imgName = "img/";
   imgName.append(fname);
   fondo = IMG_Load (imgName.c_str());
-  if (fondo == NULL)
+  if (fondo == NULL) {
+    printf("SDL could not load image! SDL_Error: %s\n", SDL_GetError());
     exit(1);
+  }
   return fondo;
 }
 

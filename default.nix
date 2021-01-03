@@ -13,7 +13,7 @@ pkgs.stdenv.mkDerivation {
   src = ./source;
 
   buildPhase = ''
-    g++ main.cpp -o truco-exe `${pkgs.SDL_sixel}/bin/sdl-config --libs --cflags` -lSDL_gfx -lSDL_image -lSDL_ttf
+    g++ main.cpp -o truco-exe `${pkgs.SDL_sixel}/bin/sdl-config --libs --cflags` -lSDLmain -lSDL_gfx -lSDL_image -lSDL_ttf
   '';
 
   nativeBuildInputs = with pkgs; [

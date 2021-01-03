@@ -21,7 +21,6 @@ using namespace std;
 #include "present.h"
 
 int main(int argc, char **argv) {
-
   /* Superficie y Fuente principal */
   SDL_Surface *pantalla;
   TTF_Font *fuente, *small;

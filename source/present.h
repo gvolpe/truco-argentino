@@ -22,6 +22,10 @@ Present::Present()
 {
   Imagen img;
   pres = img.cargar_img("present.png");
+  if (pres == NULL) {
+    printf("SDL could not load image! SDL_Error: %s\n", SDL_GetError());
+    exit(1);
+  }
   SDL_SetColorKey(pres,SDL_SRCCOLORKEY|SDL_RLEACCEL,SDL_MapRGB(pres->format,255,255,0));
   fondo = img.cargar_img("inicio.png");
 }
