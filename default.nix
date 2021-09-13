@@ -14,8 +14,10 @@ in
 
     src = ./source;
 
+    exe = "truco-exe";
+
     buildPhase = ''
-      g++ main.cpp -o truco-exe `${SDL_sixel}/bin/sdl-config --libs --cflags` -lSDLmain -lSDL_gfx -lSDL_image -lSDL_ttf
+      g++ main.cpp -o ${exe} `${SDL_sixel}/bin/sdl-config --libs --cflags` -lSDLmain -lSDL_gfx -lSDL_image -lSDL_ttf
     '';
 
     nativeBuildInputs = [
@@ -49,15 +51,15 @@ in
       patchelf \
         --set-interpreter $(cat ${stdenv.cc}/nix-support/dynamic-linker) \
         --set-rpath "${libpath}" \
-        truco-exe
-      cp truco-exe $out/bin/truco
+        ${exe}
+      cp ${exe} $out/bin/truco
     '';
 
     meta = with stdenv.lib; {
       description = "Truco Argentino";
-      homepage = "https://github.com/gvolpe/truco-argentino";
-      license = licenses.gpl3;
-      platforms = platforms.linux;
+      homepage    = "https://github.com/gvolpe/truco-argentino";
+      license     = licenses.gpl3;
+      platforms   = platforms.linux;
       maintainers = [ maintainers.gvolpe ];
     };
   }
