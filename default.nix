@@ -1,11 +1,13 @@
 let
-  nixpkgs = fetchTarball {
-    name   = "NixOS-unstable-30-12-2020";
-    url    = "https://github.com/NixOS/nixpkgs/archive/733e537a8ad7.tar.gz";
-    sha256 = "1rjvbycd8dkkflal8qysi9d571xmgqq46py3nx0wvbzwbkvzf7aw";
-  };
+  pkgs = import (
+    builtins.fetchTarball {
+      name   = "NixOS-unstable-30-12-2020";
+      url    = "https://github.com/NixOS/nixpkgs/archive/733e537a8ad7.tar.gz";
+      sha256 = "1rjvbycd8dkkflal8qysi9d571xmgqq46py3nx0wvbzwbkvzf7aw";
+    }
+  ) {};
 
-  pkgs = import nixpkgs {};
+  libpath = pkgs.lib.makeLibraryPath (with pkgs; [ stdenv.cc.cc stdenv.cc.libc SDL SDL_gfx SDL_image SDL_ttf ]);
 in
 pkgs.stdenv.mkDerivation {
   name = "truco";
@@ -35,6 +37,10 @@ pkgs.stdenv.mkDerivation {
     cp -r img/* $out/bin/img
     cp -r ./*.doc $out/bin/
     cp -r ./*.ttf $out/bin/
+    patchelf \
+      --set-interpreter $(cat ${pkgs.stdenv.cc}/nix-support/dynamic-linker) \
+      --set-rpath "${libpath}" \
+      truco-exe
     cp truco-exe $out/bin/truco
   '';
 
